@@ -20,7 +20,7 @@
 
 1. 克隆仓库
 ```bash
-git clone https://github.com/YOUR_USERNAME/MiMoAI.git
+git clone https://github.com/ibigbigip/MiMoAI.git
 cd MiMoAI
 ```
 
