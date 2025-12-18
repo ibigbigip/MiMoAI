@@ -9,6 +9,12 @@
 
 A native iOS client for Xiaomi MiMo AI.
 
+### Screenshot
+
+<p align="center">
+  <img src="screenshots/screenshot.png" width="300" alt="MiMo AI Screenshot">
+</p>
+
 ### Features
 
 - 🧠 Deep thinking process display
@@ -51,6 +57,12 @@ Then select your development team in Xcode and press Cmd+R to run.
 ## 🇨🇳 中文
 
 小米 MIMO 大模型 iOS 客户端
+
+### 截图
+
+<p align="center">
+  <img src="screenshots/screenshot.png" width="300" alt="MiMo AI 截图">
+</p>
 
 ### 功能特点
 
