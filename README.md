@@ -1,8 +1,58 @@
 # MiMo AI iOS Client
 
-小米 MIMO 大模型 iOS 客户端 - WebView 版本
+[English](#english) | [中文](#中文)
 
-## 功能特点
+---
+
+<a name="english"></a>
+## 🇺🇸 English
+
+A native iOS client for Xiaomi MiMo AI.
+
+### Features
+
+- 🧠 Deep thinking process display
+- 🌐 Web search capability
+- 💬 Multi-turn conversations
+- ⚡ Fast response
+- 📱 Native iOS experience
+
+### Requirements
+
+- macOS 13.0+ with Xcode 15.0+
+- iOS 16.0+ device or simulator
+
+### Build & Run
+
+```bash
+# Clone repository
+git clone https://github.com/ibigbigip/MiMoAI.git
+cd MiMoAI
+
+# Install XcodeGen (if not installed)
+brew install xcodegen
+
+# Generate Xcode project
+xcodegen generate
+
+# Open in Xcode
+open MiMoAI.xcodeproj
+```
+
+Then select your development team in Xcode and press Cmd+R to run.
+
+### Related Projects
+
+- [MiMoMac](https://github.com/ibigbigip/MiMoMac) - macOS Client (Direct download available!)
+
+---
+
+<a name="中文"></a>
+## 🇨🇳 中文
+
+小米 MIMO 大模型 iOS 客户端
+
+### 功能特点
 
 - 🧠 支持深度思考过程展示
 - 🌐 联网搜索功能
@@ -10,59 +60,40 @@
 - ⚡ 快速响应
 - 📱 原生 iOS 体验
 
-## 安装要求
+### 环境要求
 
-- macOS 13.0+
-- Xcode 15.0+
+- macOS 13.0+，Xcode 15.0+
 - iOS 16.0+ 设备或模拟器
 
-## 编译步骤
+### 编译运行
 
-1. 克隆仓库
 ```bash
+# 克隆仓库
 git clone https://github.com/ibigbigip/MiMoAI.git
 cd MiMoAI
-```
 
-2. 安装 XcodeGen（如果没有）
-```bash
+# 安装 XcodeGen
 brew install xcodegen
-```
 
-3. 生成 Xcode 项目
-```bash
+# 生成项目
 xcodegen generate
-```
 
-4. 打开项目并运行
-```bash
+# 打开项目
 open MiMoAI.xcodeproj
 ```
 
-5. 在 Xcode 中选择您的开发团队，然后按 Cmd+R 运行
+在 Xcode 中选择开发团队，按 Cmd+R 运行。
 
-## 项目结构
+### 相关项目
 
-```
-MiMoAI/
-├── MiMoAI/
-│   ├── MiMoAIApp.swift      # App 入口
-│   ├── ContentView.swift     # WebView 主视图
-│   ├── Info.plist
-│   └── Assets.xcassets/      # 资源文件
-└── project.yml               # XcodeGen 配置
-```
+- [MiMoMac](https://github.com/ibigbigip/MiMoMac) - macOS 桌面版（可直接下载！）
 
-## 技术栈
+---
 
-- SwiftUI
-- WKWebView
-- XcodeGen
-
-## 许可证
+## License
 
 MIT License
 
-## 致谢
+## Acknowledgements
 
-- 小米 MIMO 团队提供的 AI 服务
+- Xiaomi MiMo Team for providing AI services
