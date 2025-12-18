@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var loadProgress: Double = 0
     @State private var showError = false
     @State private var errorMessage = ""
+    @State private var showSettings = false
+    @State private var showLogoutAlert = false
     
     var body: some View {
         ZStack {
@@ -24,6 +26,26 @@ struct ContentView: View {
                 errorMessage: $errorMessage
             )
             .ignoresSafeArea(edges: .bottom)
+            
+            // 顶部工具栏
+            VStack {
+                HStack {
+                    Spacer()
+                    
+                    // 设置按钮
+                    Button(action: { showSettings = true }) {
+                        Image(systemName: "gearshape.fill")
+                            .font(.system(size: 18))
+                            .foregroundStyle(.gray)
+                            .padding(10)
+                            .background(.ultraThinMaterial)
+                            .clipShape(Circle())
+                    }
+                    .padding(.trailing, 16)
+                    .padding(.top, 8)
+                }
+                Spacer()
+            }
             
             // 加载进度条
             if isLoading {
@@ -43,6 +65,23 @@ struct ContentView: View {
         } message: {
             Text(errorMessage)
         }
+        .confirmationDialog("设置", isPresented: $showSettings) {
+            Button("刷新页面") {
+                NotificationCenter.default.post(name: .reloadWebView, object: nil)
+            }
+            Button("退出登录", role: .destructive) {
+                showLogoutAlert = true
+            }
+            Button("取消", role: .cancel) {}
+        }
+        .alert("确认退出登录？", isPresented: $showLogoutAlert) {
+            Button("退出", role: .destructive) {
+                NotificationCenter.default.post(name: .logoutWebView, object: nil)
+            }
+            Button("取消", role: .cancel) {}
+        } message: {
+            Text("将清除所有登录信息")
+        }
     }
 }
 
@@ -57,11 +96,8 @@ struct MiMoWebView: UIViewRepresentable {
     let url = URL(string: "https://aistudio.xiaomimimo.com")!
     
     func makeUIView(context: Context) -> WKWebView {
-        // 配置 WebView - 使用最简洁的配置，与 macOS 版保持一致
         let config = WKWebViewConfiguration()
         config.allowsInlineMediaPlayback = true
-        
-        // 使用持久化数据存储
         config.websiteDataStore = WKWebsiteDataStore.default()
         
         let webView = WKWebView(frame: .zero, configuration: config)
@@ -74,10 +110,8 @@ struct MiMoWebView: UIViewRepresentable {
         webView.scrollView.bounces = true
         webView.allowsBackForwardNavigationGestures = true
         
-        // 监听加载进度
         webView.addObserver(context.coordinator, forKeyPath: "estimatedProgress", options: .new, context: nil)
         
-        // 监听重新加载通知
         NotificationCenter.default.addObserver(
             context.coordinator,
             selector: #selector(Coordinator.reload),
@@ -85,9 +119,15 @@ struct MiMoWebView: UIViewRepresentable {
             object: nil
         )
         
+        NotificationCenter.default.addObserver(
+            context.coordinator,
+            selector: #selector(Coordinator.logout),
+            name: .logoutWebView,
+            object: nil
+        )
+        
         context.coordinator.webView = webView
         
-        // 加载网页
         let request = URLRequest(url: url)
         webView.load(request)
         
@@ -118,6 +158,20 @@ struct MiMoWebView: UIViewRepresentable {
         
         @objc func reload() {
             webView?.reload()
+        }
+        
+        @objc func logout() {
+            // 清除所有网站数据（Cookies、缓存等）
+            let dataStore = WKWebsiteDataStore.default()
+            let dataTypes = WKWebsiteDataStore.allWebsiteDataTypes()
+            let date = Date(timeIntervalSince1970: 0)
+            
+            dataStore.removeData(ofTypes: dataTypes, modifiedSince: date) { [weak self] in
+                // 重新加载页面
+                DispatchQueue.main.async {
+                    self?.webView?.load(URLRequest(url: self?.parent.url ?? URL(string: "https://aistudio.xiaomimimo.com")!))
+                }
+            }
         }
         
         func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
@@ -151,7 +205,6 @@ struct MiMoWebView: UIViewRepresentable {
             }
         }
         
-        // 处理导航决策
         func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
             if navigationAction.targetFrame == nil {
                 webView.load(navigationAction.request)
@@ -159,7 +212,6 @@ struct MiMoWebView: UIViewRepresentable {
             decisionHandler(.allow)
         }
         
-        // 处理新窗口
         func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
             if navigationAction.targetFrame == nil {
                 webView.load(navigationAction.request)
@@ -173,6 +225,7 @@ struct MiMoWebView: UIViewRepresentable {
 
 extension Notification.Name {
     static let reloadWebView = Notification.Name("reloadWebView")
+    static let logoutWebView = Notification.Name("logoutWebView")
 }
 
 #Preview {
