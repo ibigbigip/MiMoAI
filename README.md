@@ -1,4 +1,4 @@
-# MiMo AI iOS Client
+# MiMo AI iOS
 
 [English](#english) | [中文](#中文)
 
@@ -7,98 +7,108 @@
 <a name="english"></a>
 ## 🇺🇸 English
 
-A native iOS client for Xiaomi MiMo AI.
+Native iOS clients for Xiaomi MiMo AI. Choose your preferred version:
 
-### Screenshot
+| Version | Description | API Key Required |
+|---------|-------------|------------------|
+| [📱 WebView](./WebView/) | Loads MiMo Studio directly | ❌ No |
+| [🔑 API](./API/) | Custom API integration | ✅ Yes |
+
+### Screenshots
 
 <p align="center">
-  <img src="screenshots/screenshot.png" width="300" alt="MiMo AI Screenshot">
+  <img src="WebView/screenshots/screenshot.png" width="280" alt="WebView Version">
+  <img src="API/screenshots/screenshot.png" width="280" alt="API Version">
 </p>
 
-### Features
+---
 
-- 🧠 Deep thinking process display
-- 🌐 Web search capability
-- 💬 Multi-turn conversations
-- ⚡ Fast response
-- 📱 Native iOS experience
+## 📱 WebView Version
 
-### Requirements
-
-- macOS 13.0+ with Xcode 15.0+
-- iOS 16.0+ device or simulator
-
-### Build & Run
+The easiest way to use MiMo AI. No API key needed!
 
 ```bash
-# Clone repository
-git clone https://github.com/ibigbigip/MiMoAI.git
-cd MiMoAI
-
-# Install XcodeGen (if not installed)
+cd WebView
 brew install xcodegen
-
-# Generate Xcode project
 xcodegen generate
-
-# Open in Xcode
 open MiMoAI.xcodeproj
 ```
 
-Then select your development team in Xcode and press Cmd+R to run.
+---
 
-### Related Projects
+## 🔑 API Version
 
-- [MiMoMac](https://github.com/ibigbigip/MiMoMac) - macOS Client (Direct download available!)
+Full control with your own API key. Customizable settings.
+
+1. Get your API Key at [platform.xiaomimimo.com](https://platform.xiaomimimo.com)
+2. Build and run:
+```bash
+cd API
+brew install xcodegen
+xcodegen generate
+open MiMoChat.xcodeproj
+```
+3. Enter your API Key in Settings ⚙️
+
+---
+
+## Related Projects
+
+- [MiMoMac](https://github.com/ibigbigip/MiMoMac) - macOS Desktop Client
 
 ---
 
 <a name="中文"></a>
 ## 🇨🇳 中文
 
-小米 MIMO 大模型 iOS 客户端
+小米 MIMO 大模型 iOS 客户端。选择您喜欢的版本：
+
+| 版本 | 说明 | 需要 API Key |
+|------|------|--------------|
+| [📱 WebView 版](./WebView/) | 直接加载 MiMo Studio | ❌ 不需要 |
+| [🔑 API 版](./API/) | 自定义 API 集成 | ✅ 需要 |
 
 ### 截图
 
 <p align="center">
-  <img src="screenshots/screenshot.png" width="300" alt="MiMo AI 截图">
+  <img src="WebView/screenshots/screenshot.png" width="280" alt="WebView 版">
+  <img src="API/screenshots/screenshot.png" width="280" alt="API 版">
 </p>
 
-### 功能特点
+---
 
-- 🧠 支持深度思考过程展示
-- 🌐 联网搜索功能
-- 💬 多轮对话
-- ⚡ 快速响应
-- 📱 原生 iOS 体验
+## 📱 WebView 版
 
-### 环境要求
-
-- macOS 13.0+，Xcode 15.0+
-- iOS 16.0+ 设备或模拟器
-
-### 编译运行
+最简单的使用方式，无需 API Key！
 
 ```bash
-# 克隆仓库
-git clone https://github.com/ibigbigip/MiMoAI.git
-cd MiMoAI
-
-# 安装 XcodeGen
+cd WebView
 brew install xcodegen
-
-# 生成项目
 xcodegen generate
-
-# 打开项目
 open MiMoAI.xcodeproj
 ```
 
-在 Xcode 中选择开发团队，按 Cmd+R 运行。
+---
 
-### 相关项目
+## 🔑 API 版
 
-- [MiMoMac](https://github.com/ibigbigip/MiMoMac) - macOS 桌面版（可直接下载！）
+使用自己的 API Key，完全可控，可自定义设置。
+
+1. 在 [platform.xiaomimimo.com](https://platform.xiaomimimo.com) 申请 API Key
+2. 编译运行：
+```bash
+cd API
+brew install xcodegen
+xcodegen generate
+open MiMoChat.xcodeproj
+```
+3. 在设置 ⚙️ 中填写 API Key
+
+---
+
+## 相关项目
+
+- [MiMoMac](https://github.com/ibigbigip/MiMoMac) - macOS 桌面版
 
 ---
 
